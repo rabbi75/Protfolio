@@ -460,6 +460,9 @@ img{
 .skills__react{
 	width: 85%;
 }
+.skills__jquery{
+	width: 70%;
+}
 
 .skills__php{
 	width: 80%;
@@ -467,8 +470,8 @@ img{
 .skills__node{
 	width: 70%;
 }
-.skills__firebase{
-	width: 90%;
+.skills__ajax{
+	width: 65%;
 }
 .skills__java{
 	width: 55%;
@@ -1027,7 +1030,8 @@ img{
 		column-gap: 5rem;
 	}
 	.about__img{
-		width: 350px;
+		width: 309px;
+    	height: 326px;
 	}
 	.about__description{
 		text-align: initial;
