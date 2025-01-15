@@ -30,18 +30,9 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-  sudo apt-get -y update
-  sudo apt-get install -y apache2
-  sudo systemctl start apache2
-  sudo systemctl enable apache2
-  cd /home
-  
-  # Move files safely to /var/www/html
-  for dir in css img js; do
-    if [ -d "/var/www/html/$dir" ]; then
-      echo "Directory /var/www/html/$dir already exists, skipping..."
-    else
-      sudo mv $dir /var/www/html/
-    fi
-  done
-
+            sudo apt-get -y update
+            sudo apt-get install -y apache2
+            sudo systemctl start apache2
+            sudo systemctl enable apache2
+            cd home
+            sudo mv * /var/www/html
