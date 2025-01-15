@@ -34,23 +34,5 @@ jobs:
             sudo apt-get install -y apache2
             sudo systemctl start apache2
             sudo systemctl enable apache2
-            cd /home
-
-            # Move directories only if they don't exist
-            if [ -d "/var/www/html/css" ]; then
-              echo "Directory /var/www/html/css already exists, skipping..."
-            else
-              sudo mv css /var/www/html
-            fi
-
-            if [ -d "/var/www/html/img" ]; then
-              echo "Directory /var/www/html/img already exists, skipping..."
-            else
-              sudo mv img /var/www/html
-            fi
-
-            if [ -d "/var/www/html/js" ]; then
-              echo "Directory /var/www/html/js already exists, skipping..."
-            else
-              sudo mv js /var/www/html
-            fi
+            cd home
+            sudo mv * /var/www/html
