@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to EC2 on master branch push
+    name: Deploy to EC2 on main branch push
     runs-on: ubuntu-latest
 
     steps:
@@ -30,11 +30,11 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-  sudo apt-get -y update
-  sudo apt-get install -y apache2 rsync
-  sudo systemctl start apache2
-  sudo systemctl enable apache2
-  cd /home
+            sudo apt-get -y update
+            sudo apt-get install -y apache2 rsync
+            sudo systemctl start apache2
+            sudo systemctl enable apache2
+            cd /home
 
-  # Synchronize files to /var/www/html
-  sudo rsync -av --delete --exclude '.git' . /var/www/html/
+            # Synchronize files to /var/www/html
+            sudo rsync -av --delete --exclude '.git' . /var/www/html/
