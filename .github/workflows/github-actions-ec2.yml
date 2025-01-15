@@ -1,5 +1,6 @@
 name: Push-to-EC2
 
+# Trigger deployment only on push to main branch
 on:
   push:
     branches:
@@ -13,10 +14,8 @@ jobs:
     steps:
       - name: Checkout the files
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
-      - name: Deploy to Server
+      - name: Deploy to Server 1
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
@@ -24,17 +23,16 @@ jobs:
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
 
-      - name: Executing remote SSH commands
+      - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            sudo apt-get update -y
+            sudo apt-get -y update
             sudo apt-get install -y apache2
+            sudo systemctl start apache2
             sudo systemctl enable apache2
-            sudo rsync -av --delete /home/${{ secrets.USERNAME }}/uploaded-files/ /var/www/html/
-            sudo chown -R www-data:www-data /var/www/html
-            sudo chmod -R 775 /var/www/html
-            sudo systemctl restart apache2
+            cd home
+            sudo mv * /var/www/html
